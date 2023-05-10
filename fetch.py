@@ -1,9 +1,10 @@
 import requests
 import json
 from pathlib import Path
+from secret import key
 
-key = 'a9OP2jf04tL6ExMYMzucnqqxJA3cpV8EMhBrYA9H'
-url = 'https://api.congress.gov/v3/bill/117/hr?api_key=a9OP2jf04tL6ExMYMzucnqqxJA3cpV8EMhBrYA9H'
+
+url = f'https://api.congress.gov/v3/bill/117/hr?api_key={key}'
 
 def fetch_data():
     res = requests.get(url)
