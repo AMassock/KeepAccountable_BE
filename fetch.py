@@ -3,7 +3,6 @@ import json
 from pathlib import Path
 from secret import key
 
-
 url = f'https://api.congress.gov/v3/bill/117/hr?api_key={key}'
 
 def fetch_data():
