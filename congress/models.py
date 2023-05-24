@@ -18,3 +18,10 @@ class User(models.Model):
 
     def __str__(self):
         return self.login_name
+    
+class FavoriteList(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    item_name = models.CharField(max_length=250)
+
+    def __str__(self):
+        return self.item_name
