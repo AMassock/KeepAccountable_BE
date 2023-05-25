@@ -2,8 +2,13 @@ from django.shortcuts import render
 from django.contrib.auth.models import User
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
+from django.shortcuts import render, redirect
+from rest_framework import generics, permissions, status
+from rest_framework.response import Response
 from django.contrib.auth import authenticate, login
+from .serializers import UserSerializer, TokenSerializer
 from .models import API_KEYS, User, FavoriteList
+from rest_framework_simplejwt.tokens import RefreshToken
 
 # Create your views here.
 def api_keys(request):
@@ -11,10 +16,10 @@ def api_keys(request):
     return JsonResponse(request, '', {'key': key})
 
 def register(request):
-    print(request)
     if request.method == 'POST':
-        username = request.POST.get('username')
-        password = request.POST.get('password')
+        username = request.POST.get('username', "")
+        password = request.POST.get('password', "")
+        print(request)
 
         if not username or not password:
             return JsonResponse({'error': 'Missing username or password'}, status=400)
@@ -47,3 +52,4 @@ def login(request):
             return JsonResponse({'error': 'Invalid username or password'}, status=401)
 
     return JsonResponse({'error': 'Invalid request method'}, status=405)
+
